@@ -8,6 +8,9 @@ phases:
   install:
     runtime-versions:
       python: 3.11
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
   build:
     commands:
       - echo "Building docker Image"
@@ -18,3 +21,10 @@ phases:
       - echo "Pushing docker Image"
       - docker push "$docker_registry/$docker_username/python-app:latest"
       - echo "Build completed Successfully"
+  post_build:
+    commands:
+      - echo "Build completed successfully!"
+artifacts:
+  files:
+    - '**/*'
+  base-directory: ../simple-python-app
